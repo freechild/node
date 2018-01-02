@@ -1,0 +1,31 @@
+$main-color : lemonchiffon;
+
+@mixin first-child() {
+  &:first-of-type {
+    @content
+  }
+}
+
+body{
+  margin: 0;
+  border: 0;
+}
+
+article{
+  position: absolute;
+  width: 1024px;
+  height: 576px;
+  background: $main-color;
+
+  .buttons{
+    width: 100%;
+    height: 37px;
+    position: absolute;
+  }
+  .views{
+    @include first-child()
+    {
+      background: red;
+    }
+  }
+}
