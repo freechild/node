@@ -13,3 +13,19 @@ router.get('/',(req,res) =>{
 })
 
 export default router;
+
+
+console.log(
+
+'zero'.padStart(10)
+);
+
+async function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+const itr = gen();
+console.log(itr.next());
+console.log(itr.next());
+console.log(itr.next());
