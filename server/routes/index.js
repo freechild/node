@@ -15,17 +15,26 @@ router.get('/',(req,res) =>{
 export default router;
 
 
-console.log(
+// console.log(
 
-'zero'.padStart(10)
-);
+// 'zero'.padStart(10)
+// );
 
-async function* gen() {
-  yield 1;
-  yield 2;
-  yield 3;
+async function* gen(i) {
+  while(i <= 100)
+    yield ++i;
 }
-const itr = gen();
-console.log(itr.next());
-console.log(itr.next());
-console.log(itr.next());
+const itr = gen(99);
+// console.log(itr.next());
+
+var map = new Map();
+map.set('hero','Hero');
+map.set('test','jj');
+
+const [c, ,d] = [1,2,3]
+console.log(c);
+console.log(d);
+
+console.log(
+  Array.from('zero')
+);

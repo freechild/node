@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import styles from './styles.css'
+import { Container, Row, Col } from 'reactstrap';
 import style from './styles.scss'
 
 import times from 'lodash/times';
+import 'bootstrap/scss/bootstrap.scss';
+
 export default class Base extends Component{
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
+  }
 
   static defaultProps = {
     CountOfButtons : 0,
@@ -20,7 +26,12 @@ export default class Base extends Component{
 
   render(){
     return(
+      
       <article className="hello">
+        <Row>
+          <Col>1</Col>
+          <Col>2</Col>
+        </Row>
         <div className="buttons">
           {
             times(this.props.CountOfButtons,i =>
@@ -36,6 +47,7 @@ export default class Base extends Component{
           }
         </div>
       </article>
+
     )
   }
 }
