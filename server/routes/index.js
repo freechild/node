@@ -4,8 +4,10 @@ const router = express.Router();
 import test from "../App/test/controllers/main";
 
 
+
 //test router
 router.get('/test', test.home);
+router.get('/content', test.content);
 
 // base
 router.get('/',(req,res) =>{

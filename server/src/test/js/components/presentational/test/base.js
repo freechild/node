@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+import Async from 'react-code-splitting';
+import { Router, Route, Switch } from 'react-router'
+
+const Nav = () => (<Async load={import('./buttons')} />);
+// const styles = () => (<Async load={import('./styles.scss')} />);
+// import Nav from './buttons';
+
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'reactstrap';
 import style from './styles.scss'
@@ -12,14 +19,9 @@ export default class Base extends Component{
     return true;
   }
 
-  static defaultProps = {
-    CountOfButtons : 0,
-    views :0,
-  }
-
-  static propTypes = {
-    CountOfButtons : PropTypes.number.isRequired,
-    views : PropTypes.number.isRequired,
+  state ={
+    CountOfButtons : 6,
+    views : 5,
   }
 
 
@@ -28,20 +30,13 @@ export default class Base extends Component{
     return(
       
       <article className="hello">
-        <Row>
-          <Col>1</Col>
-          <Col>2</Col>
-        </Row>
-        <div className="buttons">
-          {
-            times(this.props.CountOfButtons,i =>
-              <div id={"btn_"+i} key={i}></div>
-            )
-          }
-        </div>
+        <Route path="/" component={Nav}
+          
+        />
+        
         <div className="views">
           {
-            times(this.props.views, i =>
+            times(this.state.views, i =>
               <div id={"view_"+i} key={i}></div>
             )
           }

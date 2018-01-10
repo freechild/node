@@ -11,8 +11,8 @@ const config = {
   watch: true,
   
   entry:{
-    'test/js/app': "./test/js/app.js",
-    'test/js/vendor': ['babel-polyfill','react', 'react-dom'],
+    'content/common/js/app': "./content/app.js",
+    'content/common/js/vendor': ['babel-polyfill','react', 'react-dom'],
   },
 
   module: {
@@ -45,6 +45,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
+    chunkFilename: 'test/js/[name].js',
     publicPath: '/',
   },
 
@@ -52,18 +53,21 @@ const config = {
     extensions: ['.js'],
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
-
+  
   plugins: [
     // Add scope hoisting
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'test/js/vendor',
+      name: 'content/common/js/vendor',
     }),
+    new HtmlWebpackPlugin(),
     
   ],
-
   devServer: {
+    contentBase:"./dist",
+    hot:true,
     historyApiFallback: true,
+    port:9000
   },
 };
 
