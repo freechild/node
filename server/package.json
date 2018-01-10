@@ -20,6 +20,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-beta.3",
+    "chunk-manifest-webpack-plugin": "^1.1.2",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.7",
     "debug": "^3.1.0",
@@ -48,6 +49,7 @@
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
+    "webpack-chunk-hash": "^0.5.0",
     "webpack-dashboard": "^1.0.2",
     "webpack-dev-server": "^2.9.7"
   }

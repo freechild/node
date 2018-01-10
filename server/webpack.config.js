@@ -1,83 +1,88 @@
-const path = require("path");
 const webpack = require('webpack');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
 
-module.exports = {
-  cache: true,
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+const WebpackChunkHash = require('webpack-chunk-hash');
+
+
+const config = {
+  context: path.resolve(__dirname, 'src'),
   watch: true,
+  
   entry:{
-    'test/js/app': ['babel-polyfill',"./src/test/js/app.js"],
+    'test/js/app': "./test/js/app.js",
+    'test/js/vendor': ['babel-polyfill','react', 'react-dom'],
   },
-  output:{
-    path: path.resolve(__dirname,"dist"),
-    filename:"[name].bundle.js"
-  },
-  module:{
-    rules:[
-      {
-        test:/\.pug$/,
-        use:"pug-html-loader"
-      },
+
+  module: {
+    rules: [
+      
       {
         test: /\.js$/,
-        use:{
-          loader:"babel-loader"
-        }
+        use: 'babel-loader',
+        exclude: /node_modules/,
       },
       {
-        test: /\.html$/,
-        use:[
-          {
-            loader: "html-loader"
-          }
-        ]
+        test: /\.(jpg|jpeg|gif|png|svg|woff|woff2)$/,
+        use: {
+          loader: 'url-loader?limit=100000&name=./[name]/[hash].[ext]',
+          options: { publicPath:'../', },
+        },
       },
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader','sass-loader']
       },
       {
-        test: /\.(ico|jpg|jpeg|gif|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              name: '[name].[ext]?[hash]',
-              limit: 10000
-            }
-          }
-        ]        
+        test:/\.pug$/,
+        use:"pug-html-loader"
       },
-      {
-        test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [
-          {
-            loader: 'url-loader?limit=100000&name=./[name]/[hash].[ext]',
-            options: {
-              publicPath:'../',
-            }
-          }
-        ]        
-      },
-    ]
+      
+    ],
   },
-  devServer:{
-    contentBase:'dist',
-    hot:true
+
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].bundle.js',
+    publicPath: '/',
   },
-  plugins:[
+
+  resolve: {
+    extensions: ['.js'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
+
+  plugins: [
+    // Add scope hoisting
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "test/js/vendor"
+      name: 'test/js/vendor',
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'), // 아래 EnvironmentPlugin처럼 할 수도 있습니다.
+    
+  ],
+
+  devServer: {
+    historyApiFallback: true,
+  },
+};
+
+
+if (process.env.NODE_ENV === 'production') {
+  config.output.filename = '[name].[chunkhash].js';
+  config.plugins = [
+    ...config.plugins,
+    new webpack.HashedModuleIdsPlugin(),
+    new WebpackChunkHash(),
+    new ChunkManifestPlugin({
+      filename: 'chunk-manifest.json',
+      manifestVariable: 'webpackManifest',
+      inlineManifest: true,
     }),
-    new webpack.optimize.UglifyJsPlugin(),
-  //   new HtmlWebPackPlugin({
-  //     template: "./src/index.html",
-  //     filename: "./index.html"
-  //   }),
-  //   new webpack.HotModuleReplacementPlugin()
-  ]
+  ];
 }
+
+
+
+
+module.exports = config;
