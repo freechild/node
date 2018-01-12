@@ -24,7 +24,7 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(jpg|jpeg|gif|png|svg|woff|woff2)$/,
+        test: /\.(jpg|jpeg|gif|png|svg|woff|woff2|eot)$/,
         use: {
           loader: 'url-loader?limit=100000&name=./[name]/[hash].[ext]',
           options: { publicPath:'../', },
@@ -33,6 +33,10 @@ const config = {
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader','sass-loader']
+      },
+      {
+        test: /\.css$/,
+        use: ['css-loader']
       },
       {
         test:/\.pug$/,
@@ -60,15 +64,18 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'content/common/js/vendor',
     }),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./content/index.html",
+      filename: "index.html"
+    }),
     
   ],
   devServer: {
-    contentBase:"./dist",
     hot:true,
-    historyApiFallback: true,
-    port:9000
-  },
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9000
+  }
 };
 
 

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Async from 'react-code-splitting';
 import { Router, Route, Switch } from 'react-router'
-import { Container, Row, Col } from 'reactstrap';
 import 'bootstrap/scss/bootstrap.scss';
 import './base.scss';
 
