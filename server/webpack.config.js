@@ -36,7 +36,7 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: ['css-loader']
+        use: ['style-loader','css-loader']
       },
       {
         test:/\.pug$/,
@@ -49,7 +49,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
-    chunkFilename: 'test/js/[name].js',
+    chunkFilename: 'content/common/js/[name].js',
     publicPath: '/',
   },
 

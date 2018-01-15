@@ -1,0 +1,33 @@
+$main-color : lemonchiffon;
+
+@mixin autoSize() {
+  @media screen and (max-width: 960px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 960px) {
+    width: 960px;
+  } 
+}
+
+
+
+article{
+    color:#333333;
+    position: fixed;
+    left: 50%;
+    top:50%;
+    transform: translateY(-50%);
+    @include autoSize();
+    height: 540px;
+}
+
+
+.videoToCenter{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: -50%;
+}
+.py-3{
+ position: absolute;
+}
