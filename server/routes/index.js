@@ -7,8 +7,9 @@ import test from "../App/test/controllers/main";
 
 //test router
 router.get('/test', test.home);
-router.get('/content', test.content);
-router.get('/content/*', test.content);
+router.get(['/content','/content/:subject','/content/:subject/:chapter'], test.content);
+
+
 
 // base
 router.get('/',(req,res) =>{

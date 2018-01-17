@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import title from '../img/subTitle_1.png'
 
-export default class Header extends Component{
-    render(){
-        return(
-            <header>
-                <img src={title}></img>  
-            </header>
-        )
-      }
+const Header = ({match,test}) =>{
+    console.log(match);
+    console.log(test);
+    
+    return(
+        <header>
+            {/* <h1>{match.url}</h1> */}
+            <img src={title}></img>  
+        </header>
+    )
 }
+
+export default Header;
