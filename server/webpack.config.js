@@ -24,6 +24,15 @@ const config = {
         exclude: /node_modules/,
       },
       {
+        test: /\.bundle\.js$/,
+        use: {
+          loader: 'bundle-loader',
+          options: {
+            name: 'my-chunk'
+          }
+        }
+      },
+      {
         test: /\.(jpg|jpeg|gif|png|svg|woff|woff2|eot)$/,
         use: {
           loader: 'url-loader?limit=100000&name=./[name]/[hash].[ext]',
@@ -64,10 +73,10 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'content/common/js/vendor',
     }),
-    new HtmlWebpackPlugin({
-      template: "./content/index.html",
-      filename: "index.html"
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: "./content/index.html",
+    //   filename: "index.html"
+    // }),
     
   ],
   devServer: {

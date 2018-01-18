@@ -37,7 +37,7 @@ class App extends Component {
         return (
             <main>
                 <ul>
-                    <li><Link to="/content/Article">Article?</Link></li>
+                    <li><Link to="/content/Article">Article</Link></li>
                     <li><Link to="/content/Footer">Footer</Link></li>
                 </ul>
                 <Route exact path="/content/:name" component={Header}/>

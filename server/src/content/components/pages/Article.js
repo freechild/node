@@ -1,18 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import './article.scss';
 import { Player, ControlBar } from 'video-react';
 import "video-react/dist/video-react.css";
-
-
-const sources = {
-    sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
-    bunnyTrailer: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
-    bunnyMovie: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-    test: 'http://media.w3.org/2010/05/video/movie_300.webm',
-  };
-
-
-export default class article extends Component{
+class Article extends Component {
     constructor(props) {
         super(props);
         
@@ -88,5 +78,15 @@ export default class article extends Component{
                 </div>
             </article>
         )
-      }
+    }
 }
+
+export default Article;
+
+
+const sources = {
+    sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+    bunnyTrailer: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
+    bunnyMovie: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+    test: 'http://media.w3.org/2010/05/video/movie_300.webm',
+};

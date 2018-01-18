@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/Base";
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from "./components/base";
 
 const wrapper = document.getElementById("app");
-
 wrapper ? ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
-    , wrapper
-) : false;
+<Router>    
+    <App />
+</Router>    
+, wrapper) : false;
