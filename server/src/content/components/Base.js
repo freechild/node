@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route,Link,Switch  } from 'react-router-dom';
 
-import { Header,Article,Footer } from './pages';
+import { Header,Article,Footer } from 'pages';
 import PropTypes from 'prop-types';
 import 'bootstrap/scss/bootstrap.scss';
 import './base.scss';
@@ -12,12 +12,18 @@ import './base.scss';
 // const Article = () => (<Async load={import('./pages/Article')} />);
 // const Footer = () => (<Async load={import('./pages/Footer')} />);
 
-class App extends Component {
+class Base extends Component {
 
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
+    // }
+
+    state = {
+        SplitMe : null,
     }
 
+    // 
+    
     static defaultProps = {
         Chapter : 0,
     }
@@ -31,15 +37,17 @@ class App extends Component {
     }
 
     componentDidMount(){
-        alert(this.props.Chapter);                
+       
     }
     render() {
+
         return (
             <main>
                 <ul>
                     <li><Link to="/content/Article">Article?</Link></li>
-                    <li><Link to="/content/Footer">Footer</Link></li>
+                    <li><Link to="/content/Footer?1">Footer</Link></li>
                 </ul>
+
                 <Route exact path="/content/:name" component={Header}/>
                 <Switch>                
                     <Route exact path="/content/Article" component={Article}/>
@@ -51,4 +59,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Base;

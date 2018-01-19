@@ -5,14 +5,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const WebpackChunkHash = require('webpack-chunk-hash');
 
+console.log(path.resolve(__dirname, 'src'));
 
 const config = {
   context: path.resolve(__dirname, 'src'),
   watch: true,
   
   entry:{
-    'content/common/js/app': "./content/app.js",
-    'content/common/js/vendor': ['babel-polyfill','react', 'react-dom'],
+    'content/common/js/vendor': ['babel-polyfill','react', 'react-dom','react-router-dom'],
+    'content/common/js/app': ['react-hot-loader/patch',"./content/app.js"],
   },
 
   module: {
@@ -58,7 +59,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
-    chunkFilename: 'content/common/js/[name].js',
+    chunkFilename: 'content/common/js/[name].[chunkhash].js',
     publicPath: '/',
   },
 
@@ -73,6 +74,10 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'content/common/js/vendor',
     }),
+    new webpack.NormalModuleReplacementPlugin(
+      /^pages$/,
+      './pages/index.async'
+  ),
     // new HtmlWebpackPlugin({
     //   template: "./content/index.html",
     //   filename: "index.html"
