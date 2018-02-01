@@ -22,7 +22,6 @@ class Base extends Component {
         SplitMe : null,
     }
 
-    // 
     
     static defaultProps = {
         Chapter : 0,
@@ -40,19 +39,17 @@ class Base extends Component {
        
     }
     render() {
-
         return (
             <main>
                 <ul>
                     <li><Link to="/content/Article">Article?</Link></li>
                     <li><Link to="/content/Footer?1">Footer</Link></li>
                 </ul>
-
                 <Route exact path="/content/:name" component={Header}/>
-                <Switch>                
-                    <Route exact path="/content/Article" component={Article}/>
-                    <Route exact path="/content/Footer" component={Footer}/>
-                </Switch>                
+                {/* <Switch>                 */}
+                <Route exact path="/content/:name" component={Article}/>
+                <Route exact path="/content/:name" component={Footer}/>
+                {/* </Switch>                 */}
             <hr/>
         </main>
         );

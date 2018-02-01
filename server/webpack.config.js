@@ -86,9 +86,12 @@ const config = {
   ],
   devServer: {
     hot:true,
+    filename: 'bundle.js',
     contentBase: path.join(__dirname, "dist"),
     compress: true,
-    port: 9000
+    proxy: {
+      "**": "http://localhost:3000"
+    }
   }
 };
 

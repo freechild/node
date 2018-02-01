@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 106:
+/***/ 107:
 /***/ (function(module, exports) {
 
 /*
@@ -83,7 +83,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ 107:
+/***/ 108:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -139,7 +139,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(176);
+var	fixUrls = __webpack_require__(382);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -456,15 +456,49 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 
-/***/ 153:
+/***/ 374:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(154);
+__webpack_require__(375);
+module.exports = __webpack_require__(378);
 
 
 /***/ }),
 
-/***/ 154:
+/***/ 375:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(376)
+
+
+/***/ }),
+
+/***/ 376:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint-disable global-require */
+
+if (true) {
+  module.exports = __webpack_require__(377);
+} else {
+  module.exports = require('./patch.dev');
+}
+
+/***/ }),
+
+/***/ 377:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* noop */
+
+
+/***/ }),
+
+/***/ 378:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -478,9 +512,9 @@ var _reactDom = __webpack_require__(109);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(76);
+var _reactRouterDom = __webpack_require__(103);
 
-var _base = __webpack_require__(173);
+var _base = __webpack_require__(379);
 
 var _base2 = _interopRequireDefault(_base);
 
@@ -495,7 +529,7 @@ wrapper ? _reactDom2.default.render(_react2.default.createElement(
 
 /***/ }),
 
-/***/ 173:
+/***/ 379:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -511,17 +545,17 @@ var _react = __webpack_require__(9);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(76);
+var _reactRouterDom = __webpack_require__(103);
 
-var _pages = __webpack_require__(174);
+var _pages = __webpack_require__(380);
 
 var _propTypes = __webpack_require__(13);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-__webpack_require__(177);
+__webpack_require__(383);
 
-__webpack_require__(179);
+__webpack_require__(385);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -553,9 +587,6 @@ var Base = function (_Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Base.__proto__ || Object.getPrototypeOf(Base)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
             SplitMe: null
-
-            // 
-
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -574,7 +605,6 @@ var Base = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-
             return _react2.default.createElement(
                 'main',
                 null,
@@ -601,12 +631,8 @@ var Base = function (_Component) {
                     )
                 ),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/content/:name', component: _pages.Header }),
-                _react2.default.createElement(
-                    _reactRouterDom.Switch,
-                    null,
-                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/content/Article', component: _pages.Article }),
-                    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/content/Footer', component: _pages.Footer })
-                ),
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/content/:name', component: _pages.Article }),
+                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/content/:name', component: _pages.Footer }),
                 _react2.default.createElement('hr', null)
             );
         }
@@ -625,7 +651,7 @@ exports.default = Base;
 
 /***/ }),
 
-/***/ 174:
+/***/ 380:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -636,25 +662,25 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Footer = exports.Article = exports.Header = undefined;
 
-var _asyncRoute = __webpack_require__(175);
+var _asyncRoute = __webpack_require__(381);
 
 var _asyncRoute2 = _interopRequireDefault(_asyncRoute);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Header = exports.Header = (0, _asyncRoute2.default)(function () {
-  return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 384));
+  return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 387));
 });
 var Article = exports.Article = (0, _asyncRoute2.default)(function () {
-  return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 385));
+  return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 388));
 });
 var Footer = exports.Footer = (0, _asyncRoute2.default)(function () {
-  return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 386));
+  return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 389));
 });
 
 /***/ }),
 
-/***/ 175:
+/***/ 381:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -732,7 +758,7 @@ function asyncComponent(getComponent) {
 
 /***/ }),
 
-/***/ 176:
+/***/ 382:
 /***/ (function(module, exports) {
 
 
@@ -828,13 +854,13 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ 177:
+/***/ 383:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(178);
+var content = __webpack_require__(384);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -842,7 +868,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(107)(content, options);
+var update = __webpack_require__(108)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -860,10 +886,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 178:
+/***/ 384:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(106)(undefined);
+exports = module.exports = __webpack_require__(107)(undefined);
 // imports
 
 
@@ -875,13 +901,13 @@ exports.push([module.i, "/*!\r\n * Bootstrap v4.0.0-beta.3 (https://getbootstrap
 
 /***/ }),
 
-/***/ 179:
+/***/ 385:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(180);
+var content = __webpack_require__(386);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -889,7 +915,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(107)(content, options);
+var update = __webpack_require__(108)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -907,10 +933,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 180:
+/***/ 386:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(106)(undefined);
+exports = module.exports = __webpack_require__(107)(undefined);
 // imports
 
 
@@ -922,4 +948,4 @@ exports.push([module.i, "body {\n  margin: 0;\n  border: 0; }\n\nheader {\n  wid
 
 /***/ })
 
-},[153]);
+},[374]);

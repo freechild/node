@@ -1,79 +1,95 @@
 import React, { Component } from 'react';
 import './article.scss';
-import { Player, ControlBar } from 'video-react';
-import "video-react/dist/video-react.css";
+// import { Player, ControlBar } from 'video-react';
+import videojs from 'video.js'
+
+import "video.js/dist/video-js.css";
+
 class Article extends Component {
     constructor(props) {
         super(props);
-        
-        this.button = this.button.bind(this)
-        this.play = this.play.bind(this);
-        this.pause = this.pause.bind(this);
-        this.load = this.load.bind(this);
-        
+        this.button = this.button.bind(this)        
     }
-    // constructor(props, context) {
-    //     super(props, context);
-    
-    //     this.state = {
-    //       source: sources['bunnyMovie'],
-    //     };
-    
-    //     this.changeCurrentTime = this.changeCurrentTime.bind(this);
-    //     this.seek = this.seek.bind(this);
-    //     this.changePlaybackRateRate = this.changePlaybackRateRate.bind(this);
-    //     this.changeVolume = this.changeVolume.bind(this);
-    //     this.setMuted = this.setMuted.bind(this);
-    // }
+
     state = {
-        source: sources['bunnyMovie'],
+        video : null,
+        buttons : null,
+        video_current_time : null,
+        video_duration : null,        
     };
 
     button(action){
-        console.log(action);
-        
-        // switch(action){
-        //     case play:
-        //         break;
-        //     case pause:    
-        //         break;
-        //     case load:
-        //         break;
-        //     default:
-        //         alert('error');
-        // }
+        let API_video = this.state.video        
+        let defineButton = action.target.getAttribute('data-type')
+        switch(defineButton){
+            case 'play':
+                API_video.play();
+                break;
+            case 'pause':
+                API_video.pause();
+                break;
+            case 'load':
+                API_video.load();
+                break;
+            default:
+                console.log(defineButton);                
+        }
     }
-    
-    
 
-    componentDidMount() {
-        // this.refs.player.playbackRate = 2;           
-        this.refs.player.play();
+    componentDidMount(){
+        this.mountVideoPlayer();   
+
     }
-    play(){
-        this.refs.player.play();
+
+    componentWillMount() {
+
     }
-    pause(){
-        this.refs.player.pause();
+    componentWillReceiveProps(){
+        let API_video = this.state.video        
+        console.log(this.state);
+        
+        // if(API_video.)    
     }
-    load(){
-        this.refs.player.load();
+
+    componentDidUpdate(prevProps, prevState){
+        
     }
+    
+    mountVideoPlayer(){
+        let src = 'http://media.w3.org/2010/05/sintel/trailer.mp4';
+        let options = videoJsOptions;
+        let API_video = videojs(this.videoNode,options)
+        this.setState({
+            video:API_video,
+            buttons : this.button, 
+        }, () => {
+            let that = this
+            API_video.on("timeupdate",function(){
+                that.videoTimeUpdate(API_video);                 
+            })
+        });
+    }
+    
+    videoTimeUpdate(player){
+        let duration = player.duration();
+        let time = player.scrubbing() ? player.getCache().currentTime : player.currentTime();
+        this.setState({
+            video_current_time:time,
+            video_duration : duration, 
+        })
+    }
+
     render(){
         return(
             <article>  
                 <div className="videoToCenter">
-                <Player
-                    ref="player"                                    
-                >
-                    <source src={this.state.source} />
-                </Player>
-                    {/* <video id="video" src="http://rgb2000.iptime.org:2002/out/Course_Write_Down/08/vod/08_01.mp4" className="video-js vjs-default-skin"   preload="none" width="100%" height="100%" data-setup="{}" webkit-playsinline playsinline></video> */}
+                    <video ref={ node => this.videoNode = node } className="video-js"></video>
                 </div>
+                
                 <div className="py-3">
-                    <button  className="mr-3" onClick={this.button}>play()</button>
-                    <button  className="mr-3" onClick={this.pause}>pause()</button>
-                    <button  className="mr-3" onClick={this.load}>load()</button>
+                    <button  className="mr-3" data-type="play" onClick={this.button}>play()</button>
+                    <button  className="mr-3" data-type="pause" onClick={this.button}>pause()</button>
+                    <button  className="mr-3" data-type="load" onClick={this.button}>load()</button>
                     
                 </div>
             </article>
@@ -84,9 +100,11 @@ class Article extends Component {
 export default Article;
 
 
-const sources = {
-    sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
-    bunnyTrailer: 'http://media.w3.org/2010/05/bunny/trailer.mp4',
-    bunnyMovie: 'http://media.w3.org/2010/05/bunny/movie.mp4',
-    test: 'http://media.w3.org/2010/05/video/movie_300.webm',
-};
+const videoJsOptions = {
+    autoplay: true,
+    controls: true,
+    sources: [{
+      src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+      type: 'video/mp4'
+    }]
+  }
