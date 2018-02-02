@@ -8,14 +8,14 @@ import "video.js/dist/video-js.css";
 class Article extends Component {
     constructor(props) {
         super(props);
-        this.button = this.button.bind(this)        
+        this.button = this.button.bind(this);       
     }
 
     state = {
         video : null,
         buttons : null,
-        video_current_time : null,
-        video_duration : null,        
+        video_current_time : 0,
+        video_duration : 0,        
     };
 
     button(action){
@@ -54,7 +54,14 @@ class Article extends Component {
     componentDidUpdate(prevProps, prevState){
         
     }
-    
+
+    shouldComponentUpdate(nextProps, nextState){
+        return (JSON.stringify(nextState) != JSON.stringify(this.state));
+    }
+    // componentWillUpdate(nextProps, nextState){
+    //     console.log("componentWillUpdate: " + JSON.stringify(nextState));
+    // }
+
     mountVideoPlayer(){
         let src = 'http://media.w3.org/2010/05/sintel/trailer.mp4';
         let options = videoJsOptions;
@@ -68,6 +75,12 @@ class Article extends Component {
                 that.videoTimeUpdate(API_video);                 
             })
         });
+        // this.setState((prevState, props) => ({
+        //     video: API_video,
+        //     buttons : this.button, 
+        // }));
+        // console.log(this.state);
+        
     }
     
     videoTimeUpdate(player){
@@ -90,6 +103,9 @@ class Article extends Component {
                     <button  className="mr-3" data-type="play" onClick={this.button}>play()</button>
                     <button  className="mr-3" data-type="pause" onClick={this.button}>pause()</button>
                     <button  className="mr-3" data-type="load" onClick={this.button}>load()</button>
+                    <input
+                        value={this.state.video_current_time}
+                    />
                     
                 </div>
             </article>

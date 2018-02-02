@@ -34,6 +34,9 @@ class Base extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         return true;
     }
+    componentWillUpdate(nextProps, nextState){
+        console.log("componentWillUpdate: " + JSON.stringify(nextState));
+    }
 
     componentDidMount(){
        
