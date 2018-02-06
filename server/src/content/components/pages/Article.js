@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './article.scss';
+// import { increment, decrement } from '../../actions';
 // import { Player, ControlBar } from 'video-react';
 import videojs from 'video.js'
 
@@ -103,6 +104,14 @@ class Article extends Component {
                     <button  className="mr-3" data-type="play" onClick={this.button}>play()</button>
                     <button  className="mr-3" data-type="pause" onClick={this.button}>pause()</button>
                     <button  className="mr-3" data-type="load" onClick={this.button}>load()</button>
+                    <button type="button"
+                        onClick={ this.props.onIncrement }>
+                        +
+                    </button>
+                    <button type="button"
+                            onClick={ this.props.onDecrement }>
+                            -
+                    </button>
                     <input
                         value={this.state.video_current_time}
                     />
@@ -113,14 +122,23 @@ class Article extends Component {
     }
 }
 
-export default Article;
 
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         onIncrement: () => dispatch(increment()),
+//         onDecrement: () => dispatch(decrement())
+//     }
+// }
+
+// Buttons = connect(undefined, mapDispatchToProps)(Buttons);
 
 const videoJsOptions = {
     autoplay: true,
     controls: true,
     sources: [{
-      src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
-      type: 'video/mp4'
+        src: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
+        type: 'video/mp4'
     }]
-  }
+}
+
+export default Article;

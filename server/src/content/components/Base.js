@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route,Link,Switch  } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import { Header,Article,Footer } from 'pages';
 import PropTypes from 'prop-types';
 import 'bootstrap/scss/bootstrap.scss';
@@ -14,14 +14,13 @@ import './base.scss';
 
 class Base extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    // }
-
-    state = {
-        SplitMe : null,
+    constructor(props) {
+        super(props);
     }
 
+    // 
+    
+    
     
     static defaultProps = {
         Chapter : 0,
@@ -34,24 +33,24 @@ class Base extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         return true;
     }
-    componentWillUpdate(nextProps, nextState){
-        console.log("componentWillUpdate: " + JSON.stringify(nextState));
-    }
 
     componentDidMount(){
-       
+        console.log(this);
+            
     }
     render() {
+
         return (
             <main>
                 <ul>
                     <li><Link to="/content/Article">Article?</Link></li>
                     <li><Link to="/content/Footer?1">Footer</Link></li>
                 </ul>
+
                 <Route exact path="/content/:name" component={Header}/>
                 {/* <Switch>                 */}
-                <Route exact path="/content/:name" component={Article}/>
-                <Route exact path="/content/:name" component={Footer}/>
+                    <Route exact path="/content/:name" component={Article}/>
+                    <Route exact path="/content/:name" component={Footer}/>
                 {/* </Switch>                 */}
             <hr/>
         </main>
